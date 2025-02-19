@@ -49,7 +49,6 @@ class Ship:
 class Battleship:
     def __init__(self, ships: list[tuple]) -> None:
         self.fields = {}
-        self.ships = []
         for _tuple in ships:
             ship = Ship(_tuple[0], _tuple[1])
             for deck in ship.decks:
@@ -71,7 +70,8 @@ class Battleship:
                         print("x")
                     elif not ship.get_deck(row, column).is_alive:
                         print("*")
-                    print(u"\u25A1")
+                    else:
+                        print(u"\u25A1")
                 else:
                     print("~")
                 print("  ")
@@ -85,7 +85,7 @@ class Battleship:
             for neighbour in self.ships:
                 if ship != neighbour:
                     temp = Battleship._validate_ships_not_touch_one_another(
-                        neighbour,
+                        ship,
                         neighbour)
                     result = result and temp
                     if not result:
